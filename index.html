@@ -1,0 +1,765 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaTech | Future Technology</title>
+
+<style>
+/* ===== Global Styles ===== */
+:root {
+  --bg: #030817;
+  --panel: rgba(9, 27, 58, .78);
+  --blue: #00c8ff;
+  --purple: #8557ff;
+  --text: #f3f7ff;
+  --muted: #a9bddc;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+.container {
+  width: min(1280px, 90%);
+  margin: auto;
+}
+
+section { scroll-margin-top: 100px; }
+
+/* ===== Animated Background ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 75% 20%, #102d67 0%, transparent 38%),
+    radial-gradient(ellipse at 15% 70%, #091b42 0%, transparent 40%);
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .35;
+  background-image: radial-gradient(#8bdfff 1px, transparent 1px);
+  background-size: 52px 52px;
+  animation: starMove 25s linear infinite;
+}
+
+@keyframes starMove {
+  to { background-position: 104px 104px; }
+}
+
+/* ===== Navigation ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(3, 8, 23, .82);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(0, 200, 255, .12);
+}
+
+.navbar {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -.8px;
+}
+
+.logo-icon {
+  color: var(--blue);
+  font-size: 34px;
+  filter: drop-shadow(0 0 12px var(--blue));
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+nav a {
+  color: var(--muted);
+  font-size: 14px;
+  transition: .25s;
+}
+
+nav a:hover, nav a.active { color: var(--blue); }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 23px;
+  border: 1px solid var(--blue);
+  border-radius: 50px;
+  color: white;
+  background: transparent;
+  transition: .3s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px #00c8ff55;
+}
+
+.btn-primary {
+  background: linear-gradient(110deg, #0878ff, #00d5ff);
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 0 20px #00c8ff30;
+}
+
+.menu-toggle {
+  display: none;
+  color: var(--blue);
+  background: none;
+  border: none;
+  font-size: 28px;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  min-height: 570px;
+  padding: 75px 0 55px;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #00c8ff55;
+  background: #007cff17;
+  color: var(--blue);
+  border-radius: 50px;
+  padding: 10px 17px;
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--blue);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--blue);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: .35; transform: scale(.7); }
+}
+
+.hero h1 {
+  font-size: clamp(42px, 5.5vw, 76px);
+  line-height: 1.08;
+  letter-spacing: -3px;
+  margin-bottom: 24px;
+}
+
+.gradient-text {
+  background: linear-gradient(100deg, #00d5ff, #9b71ff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero p {
+  max-width: 520px;
+  color: var(--muted);
+  line-height: 1.9;
+  font-size: 16px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+/* ===== Futuristic Orb ===== */
+.visual {
+  min-height: 410px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+.orb {
+  width: min(300px, 70vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: relative;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 35% 30%, #a9f4ff 0%, #138aff 9%,
+    #102d8b 32%, #06122e 65%, transparent 70%);
+  box-shadow: 0 0 55px #087fff65, inset 0 0 35px #00c8ff55;
+  animation: float 5s ease-in-out infinite;
+}
+
+.orb::before, .orb::after {
+  content: "";
+  position: absolute;
+  inset: -25px;
+  border: 1px solid #00c8ff8c;
+  border-radius: 50%;
+  transform: rotateX(67deg) rotateZ(-20deg);
+  box-shadow: 0 0 20px #00c8ff25;
+}
+
+.orb::after {
+  inset: -48px;
+  border-color: #9465ff99;
+  transform: rotateX(67deg) rotateZ(55deg);
+}
+
+.orb-core {
+  font-size: 90px;
+  filter: drop-shadow(0 0 20px #00c8ff);
+}
+
+.orb-label {
+  position: absolute;
+  bottom: 4px;
+  color: var(--blue);
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px var(--blue);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.tech-chip {
+  position: absolute;
+  z-index: 2;
+  padding: 13px 17px;
+  border: 1px solid #00c8ff66;
+  border-radius: 12px;
+  background: rgba(4, 20, 48, .86);
+  backdrop-filter: blur(12px);
+  color: #dceaff;
+  font-size: 12px;
+  box-shadow: 0 0 25px #007bff12;
+  animation: float 4s ease-in-out infinite;
+}
+
+.tech-chip strong {
+  display: block;
+  color: var(--blue);
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.chip-one { top: 30px; left: 0; }
+.chip-two { top: 70px; right: -4px; animation-delay: .7s; }
+.chip-three { bottom: 40px; left: 8px; animation-delay: 1.2s; }
+
+/* ===== Statistics ===== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid #178aff55;
+  background: linear-gradient(110deg, #06152e, #0a1740cc);
+  border-radius: 18px;
+  padding: 25px 10px;
+  margin-bottom: 95px;
+}
+
+.stat {
+  text-align: center;
+  padding: 10px;
+  border-right: 1px solid #4d83b655;
+}
+
+.stat:last-child { border-right: none; }
+
+.stat h2 {
+  font-size: 30px;
+  color: var(--blue);
+  margin-bottom: 7px;
+}
+
+.stat p { color: var(--muted); font-size: 13px; }
+
+/* ===== Feature Cards ===== */
+.section-heading {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 45px;
+}
+
+.section-heading h2 {
+  font-size: clamp(30px, 4vw, 44px);
+  margin-bottom: 15px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding-bottom: 95px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  padding: 28px 23px;
+  border: 1px solid #1878c955;
+  border-radius: 17px;
+  background: linear-gradient(145deg, #0b2042cc, #060d20);
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  right: -75px;
+  top: -75px;
+  background: var(--blue);
+  filter: blur(65px);
+  opacity: .13;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: var(--blue);
+  box-shadow: 0 15px 40px #007bff1b;
+}
+
+.card-icon {
+  width: 55px;
+  height: 55px;
+  display: grid;
+  place-items: center;
+  font-size: 27px;
+  border: 1px solid #00c8ff55;
+  border-radius: 15px;
+  background: #007bff18;
+  margin-bottom: 24px;
+}
+
+.card h3 { font-size: 18px; margin-bottom: 13px; }
+.card p { color: var(--muted); font-size: 13px; line-height: 1.8; }
+
+.learn-more {
+  display: inline-block;
+  margin-top: 22px;
+  color: var(--blue);
+  font-size: 13px;
+}
+
+/* ===== CTA ===== */
+.cta {
+  margin-bottom: 90px;
+  padding: 55px 25px;
+  text-align: center;
+  border: 1px solid #586cff55;
+  border-radius: 22px;
+  background:
+    radial-gradient(ellipse at 50% 120%, #1952a866, transparent 65%),
+    #09142b;
+}
+
+.cta h2 { font-size: clamp(28px, 4vw, 42px); margin-bottom: 15px; }
+.cta p { color: var(--muted); margin-bottom: 25px; line-height: 1.8; }
+
+/* ===== Footer ===== */
+footer {
+  border-top: 1px solid #ffffff16;
+  padding: 30px 0;
+  color: var(--muted);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+
+.footer-links { display: flex; gap: 20px; }
+.footer-links a:hover { color: var(--blue); }
+
+/* ===== Scroll Reveal ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 1000px) {
+  nav { gap: 17px; }
+  .hero { gap: 15px; }
+  .features { grid-template-columns: repeat(2, 1fr); }
+  .chip-two { right: 0; }
+}
+
+@media (max-width: 760px) {
+  .navbar { min-height: 72px; }
+  .menu-toggle { display: block; }
+  .nav-actions .btn { display: none; }
+
+  nav {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    padding: 25px 5%;
+    background: #050d20;
+    border-bottom: 1px solid #00c8ff33;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav.open { display: flex; }
+  nav a { font-size: 16px; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 55px;
+  }
+
+  .hero h1 { letter-spacing: -1.8px; }
+  .visual { min-height: 390px; margin-top: 15px; }
+  .orb { width: 235px; }
+  .orb-core { font-size: 70px; }
+  .tech-chip { padding: 10px 12px; font-size: 10px; }
+  .chip-one { left: 0; top: 20px; }
+  .chip-two { right: 0; top: 55px; }
+  .chip-three { left: 0; bottom: 20px; }
+
+  .stats { grid-template-columns: repeat(2, 1fr); margin-bottom: 70px; }
+  .stat:nth-child(2) { border-right: none; }
+  .stat:nth-child(-n+2) { border-bottom: 1px solid #4d83b655; }
+  .features { padding-bottom: 70px; }
+}
+
+@media (max-width: 480px) {
+  .container { width: 91%; }
+  .logo { font-size: 21px; }
+  .hero h1 { font-size: 43px; }
+  .hero p { font-size: 14px; }
+  .hero-buttons .btn { padding: 12px 17px; }
+  .features { grid-template-columns: 1fr; gap: 15px; }
+  .stat h2 { font-size: 25px; }
+  .visual { min-height: 340px; }
+  .orb { width: 190px; }
+  .orb::before { inset: -15px; }
+  .orb::after { inset: -30px; }
+  .orb-core { font-size: 60px; }
+  .tech-chip strong { font-size: 11px; }
+  .cta { padding: 40px 18px; }
+}
+</style>
+</head>
+
+<body>
+<div class="stars"></div>
+
+<!-- Navigation -->
+<header>
+  <div class="container navbar">
+    <a class="logo" href="#home">
+      <span class="logo-icon">⟠</span>
+      The  Professional Design
+    </a>
+
+    <nav id="navigation">
+      <a class="active" href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="#technology">Technology</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="#contact" class="btn">Get Started ↗</a>
+      <button class="menu-toggle" id="menuToggle"
+        aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="container hero" id="home">
+    <div class="hero-content reveal">
+      <div class="eyebrow">
+        <span class="pulse-dot"></span>
+        AI POWERED · NEXT GEN SOLUTIONS
+      </div>
+
+      <h1>The Future of <span class="gradient-text">Technology</span> is Here</h1>
+
+      <p>
+        We build intelligent solutions for a smarter, faster and more
+        connected tomorrow. Explore the power of AI, robotics, cloud
+        and next-generation computing.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#features" class="btn btn-primary">Explore Now ↗</a>
+        <a href="#technology" class="btn">◉ Discover Tech</a>
+      </div>
+    </div>
+
+    <div class="visual reveal" aria-label="Abstract futuristic technology illustration">
+      <div class="tech-chip chip-one">
+        <strong>◈ Artificial Intelligence</strong>
+        Smarter decisions<br>Better tomorrow
+      </div>
+
+      <div class="tech-chip chip-two">
+        <strong>⌘ Quantum Computing</strong>
+        Beyond traditional<br>computing limits
+      </div>
+
+      <div class="tech-chip chip-three">
+        <strong>☁ Cloud Technology</strong>
+        Your data, connected<br>Anywhere
+      </div>
+
+      <div class="orb">
+        <div class="orb-core">🌐</div>
+        <div class="orb-label">FUTURE ONLINE</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <section class="container stats reveal" id="about">
+    <div class="stat">
+      <h2 data-target="10" data-suffix="M+">0</h2>
+      <p>Happy Users</p>
+    </div>
+    <div class="stat">
+      <h2 data-target="500" data-suffix="+">0</h2>
+      <p>Innovative Projects</p>
+    </div>
+    <div class="stat">
+      <h2 data-target="120" data-suffix="+">0</h2>
+      <p>Countries Reached</p>
+    </div>
+    <div class="stat">
+      <h2 data-target="99" data-suffix=".9%">0</h2>
+      <p>System Reliability</p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="container" id="features">
+    <div class="section-heading reveal">
+      <div class="eyebrow">✦ EXPLORE OUR INNOVATIONS</div>
+      <h2>Technology That Shapes <span class="gradient-text">Tomorrow</span></h2>
+      <p>
+        Powerful digital technologies designed to transform the way
+        people live, work, communicate and innovate.
+      </p>
+    </div>
+
+    <div class="features" id="technology">
+      <article class="card reveal">
+        <div class="card-icon">◈</div>
+        <h3>Artificial Intelligence</h3>
+        <p>Intelligent systems that learn, adapt and turn complex data into smarter decisions.</p>
+        <a href="#contact" class="learn-more">Learn More ↗</a>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-icon">☁</div>
+        <h3>Cloud Computing</h3>
+        <p>Flexible, scalable infrastructure that keeps your digital world connected.</p>
+        <a href="#contact" class="learn-more">Learn More ↗</a>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-icon">⚛</div>
+        <h3>Quantum Computing</h3>
+        <p>Explore emerging computational possibilities for tomorrow's toughest challenges.</p>
+        <a href="#contact" class="learn-more">Learn More ↗</a>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-icon">🤖</div>
+        <h3>Robotics & Automation</h3>
+        <p>Bring precision, automation and intelligent machines into modern workflows.</p>
+        <a href="#contact" class="learn-more">Learn More ↗</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="container cta reveal" id="contact">
+    <h2>Ready to Build the <span class="gradient-text">Future?</span></h2>
+    <p>Turn your next big idea into a powerful digital experience.</p>
+    <a class="btn btn-primary" href="mailto:hello@example.com">
+      Let's Connect ↗
+    </a>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="container footer-inner">
+    <a href="#home" class="logo">
+      <span class="logo-icon">⟠</span> NovaTech
+    </a>
+
+    <p>© <span id="year"></span> NovaTech. Built for tomorrow.</p>
+
+    <div class="footer-links">
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== Mobile Navigation =====
+const menuToggle = document.getElementById("menuToggle");
+const navigation = document.getElementById("navigation");
+
+menuToggle.addEventListener("click", () => {
+  const isOpen = navigation.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", isOpen);
+  menuToggle.textContent = isOpen ? "✕" : "☰";
+});
+
+navigation.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navigation.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.textContent = "☰";
+  });
+});
+
+// ===== Reveal Elements on Scroll =====
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(element => {
+  revealObserver.observe(element);
+});
+
+// ===== Animated Statistics =====
+const statObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    const element = entry.target;
+    const target = Number(element.dataset.target);
+    const suffix = element.dataset.suffix || "";
+    const duration = 1400;
+    const start = performance.now();
+
+    function updateNumber(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      element.textContent =
+        Math.floor(target * eased) + suffix;
+
+      if (progress < 1) {
+        requestAnimationFrame(updateNumber);
+      }
+    }
+
+    requestAnimationFrame(updateNumber);
+    statObserver.unobserve(element);
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll("[data-target]").forEach(element => {
+  statObserver.observe(element);
+});
+
+// ===== Current Copyright Year =====
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+// ===== Active Navigation Link =====
+const sections = document.querySelectorAll("main section[id]");
+const navLinks = document.querySelectorAll("nav a");
+
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    navLinks.forEach(link => {
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === "#" + entry.target.id
+      );
+    });
+  });
+}, { rootMargin: "-25% 0px -60% 0px" });
+
+sections.forEach(section => sectionObserver.observe(section));
+</script>
+</body>
+</html>
